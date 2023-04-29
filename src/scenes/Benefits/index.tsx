@@ -26,6 +26,12 @@ const benefits: Array<BenefitType> = [
 	}
 ]
 
+const container = {
+	hiddem: {},
+	visible: {
+		transition: { staggerChildren: 0.2 }
+	}
+}
 
 const Benefits = ({ setSelectedPage }: Props) => {
 	return (
@@ -45,9 +51,15 @@ const Benefits = ({ setSelectedPage }: Props) => {
 				</div>
 
 				{/* BENEFITS */}
-				<div className="md:flex items-center justify-between gap-8 mt-5">
+				<motion.div
+					className="md:flex items-center justify-between gap-8 mt-5"
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: true, amount: 0.5 }}
+					variants={container}
+				>
 					{benefits.map((benefit: BenefitType) => (
-						<Benefit 
+						<Benefit
 							key={benefit.title}
 							icon={benefit.icon}
 							title={benefit.title}
@@ -55,9 +67,9 @@ const Benefits = ({ setSelectedPage }: Props) => {
 							setSelectedPage={setSelectedPage}
 						/>
 					))}
-				</div>
+				</motion.div>
 			</motion.div>
-		</section>
+		</section >
 	)
 }
 
